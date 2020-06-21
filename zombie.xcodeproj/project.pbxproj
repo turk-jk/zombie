@@ -40,6 +40,8 @@
 		DE97B671249F69D800AE1F12 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B670249F69D800AE1F12 /* extensions.swift */; };
 		DE97B673249F6B9F00AE1F12 /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B661249F659F00AE1F12 /* strings.swift */; };
 		DE97B675249FCF7400AE1F12 /* vibers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B674249FCF7400AE1F12 /* vibers.swift */; };
+		DE97B677249FD7C400AE1F12 /* Popover.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B676249FD7C400AE1F12 /* Popover.swift */; };
+		DE97B679249FEC9E00AE1F12 /* Tutorial.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B678249FEC9E00AE1F12 /* Tutorial.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,8 @@
 		DE97B66E249F693E00AE1F12 /* mapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapDelegate.swift; sourceTree = "<group>"; };
 		DE97B670249F69D800AE1F12 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		DE97B674249FCF7400AE1F12 /* vibers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = vibers.swift; sourceTree = "<group>"; };
+		DE97B676249FD7C400AE1F12 /* Popover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popover.swift; sourceTree = "<group>"; };
+		DE97B678249FEC9E00AE1F12 /* Tutorial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tutorial.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +250,7 @@
 				DE97B666249F68D400AE1F12 /* NSFetchedRCHelper.swift */,
 				DE97B670249F69D800AE1F12 /* extensions.swift */,
 				DE97B674249FCF7400AE1F12 /* vibers.swift */,
+				DE97B676249FD7C400AE1F12 /* Popover.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -258,6 +263,7 @@
 				DE97B66A249F691600AE1F12 /* locationAndETA.swift */,
 				DE97B66C249F692B00AE1F12 /* fetchHospitals.swift */,
 				DE97B66E249F693E00AE1F12 /* mapDelegate.swift */,
+				DE97B678249FEC9E00AE1F12 /* Tutorial.swift */,
 			);
 			path = hospitalListView;
 			sourceTree = "<group>";
@@ -457,10 +463,12 @@
 				DE97B602249F555900AE1F12 /* AppDelegate.swift in Sources */,
 				DE97B65C249F64B600AE1F12 /* themeColor.swift in Sources */,
 				DE97B667249F68D400AE1F12 /* NSFetchedRCHelper.swift in Sources */,
+				DE97B679249FEC9E00AE1F12 /* Tutorial.swift in Sources */,
 				DE97B66D249F692B00AE1F12 /* fetchHospitals.swift in Sources */,
 				DE97B66B249F691600AE1F12 /* locationAndETA.swift in Sources */,
 				DE97B662249F659F00AE1F12 /* strings.swift in Sources */,
 				DE97B64E249F622900AE1F12 /* MapsStruct.swift in Sources */,
+				DE97B677249FD7C400AE1F12 /* Popover.swift in Sources */,
 				DE97B65E249F64FF00AE1F12 /* illnessCell.swift in Sources */,
 				DE97B604249F555900AE1F12 /* SceneDelegate.swift in Sources */,
 			);

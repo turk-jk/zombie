@@ -30,8 +30,10 @@ class hospialListViewController: UIViewController {
     lazy private var fullTableConstraint = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0)
     lazy private var halfTableConstraint = NSLayoutConstraint(item: tableView, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: view.frame.height / 1.7)
     
-    var toggleMap: UIBarButtonItem!
-    var refresh: UIBarButtonItem!
+    var toggleMapBarItem: UIBarButtonItem!
+    var refreshBarItem: UIBarButtonItem!
+    var switchtransport: UISwitch!
+    var segmentTransportMode: UISegmentedControl!
     
     init(levelOfPain: Int) {
         self.levelOfPain = levelOfPain
@@ -49,22 +51,27 @@ class hospialListViewController: UIViewController {
         title = "Our suggested Hospitals"
 
         
-        toggleMap = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-marker-29"), style: .plain, target: self, action: #selector(hospialListViewController.toggleMapPressed))
-        toggleMap.tintColor = .mainColor
-        refresh = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshList))
-        refresh.tintColor = .mainColor
+        toggleMapBarItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-marker-29"), style: .plain, target: self, action: #selector(toggleMapPressed))
+        toggleMapBarItem.tintColor = .mainColor
+        refreshBarItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshList))
+        refreshBarItem.tintColor = .mainColor
         
         
         let resetButton = UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(ResetPressed))
         resetButton.tintColor = .mainColor
         
-        self.navigationItem.rightBarButtonItems = [refresh, toggleMap]
+        self.navigationItem.rightBarButtonItems = [refreshBarItem, toggleMapBarItem]
         self.navigationItem.leftBarButtonItem = resetButton
     }
     override func viewDidAppear(_ animated: Bool) {
         
         fetchHospitalsLocally()
         fetchremoteHospitals()
+        DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
+            
+//            UserDefaults.standard.set(nil, forKey: st.tutorial.s)
+            self.showTutorial()
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -174,13 +181,13 @@ extension hospialListViewController: UITableViewDelegate{
         
         //Segemnt of transport modes
         let images = transportMode.allCases.map{$0.fillImage}
-        let segment = UISegmentedControl(items: images)
-        segment.isHidden = !calculateTransport
-        segment.selectedSegmentIndex = selectedSegmentIndex
+        let segmentTransportMode = UISegmentedControl(items: images)
+        segmentTransportMode.isHidden = !calculateTransport
+        segmentTransportMode.selectedSegmentIndex = selectedSegmentIndex
         
-        segment.addTarget(self, action: #selector(transportModeChanged(_:)), for: .valueChanged)
-        segment.tintColor = .mainColor
-        
+        segmentTransportMode.addTarget(self, action: #selector(transportModeChanged(_:)), for: .valueChanged)
+        segmentTransportMode.tintColor = .mainColor
+        self.segmentTransportMode = segmentTransportMode
         let label = UILabel()
         label.text = !calculateTransport ? " Calculate ETA to the hospital:" : " Calculate ETA:"
         label.adjustsFontSizeToFitWidth = true
@@ -190,8 +197,9 @@ extension hospialListViewController: UITableViewDelegate{
         switchtransport.isOn = calculateTransport
         switchtransport.addTarget(self, action: #selector(calculateETAChanged(_:)), for: .valueChanged)
         switchtransport.onTintColor = .mainColor
+        self.switchtransport = switchtransport
         
-        let stack = UIStackView(arrangedSubviews: [label, segment, switchtransport])
+        let stack = UIStackView(arrangedSubviews: [label, segmentTransportMode, switchtransport])
         stack.axis = .horizontal
         stack.distribution = .fillProportionally
         stack.alignment = .center

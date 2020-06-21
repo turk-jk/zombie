@@ -25,6 +25,7 @@
 		DE97B650249F624800AE1F12 /* HospitalStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B64F249F624800AE1F12 /* HospitalStruct.swift */; };
 		DE97B652249F626A00AE1F12 /* IllnessesStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B651249F626A00AE1F12 /* IllnessesStruct.swift */; };
 		DE97B654249F628200AE1F12 /* transportMode.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B653249F628200AE1F12 /* transportMode.swift */; };
+		DE97B656249F62F100AE1F12 /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B655249F62F100AE1F12 /* APIController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		DE97B64F249F624800AE1F12 /* HospitalStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HospitalStruct.swift; sourceTree = "<group>"; };
 		DE97B651249F626A00AE1F12 /* IllnessesStruct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IllnessesStruct.swift; sourceTree = "<group>"; };
 		DE97B653249F628200AE1F12 /* transportMode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = transportMode.swift; sourceTree = "<group>"; };
+		DE97B655249F62F100AE1F12 /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +172,7 @@
 				DE97B64F249F624800AE1F12 /* HospitalStruct.swift */,
 				DE97B651249F626A00AE1F12 /* IllnessesStruct.swift */,
 				DE97B653249F628200AE1F12 /* transportMode.swift */,
+				DE97B655249F62F100AE1F12 /* APIController.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -305,6 +308,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE97B656249F62F100AE1F12 /* APIController.swift in Sources */,
 				DE97B650249F624800AE1F12 /* HospitalStruct.swift in Sources */,
 				DE97B648249F582000AE1F12 /* WaitingItem+CoreDataClass.swift in Sources */,
 				DE97B647249F582000AE1F12 /* Hospitals+CoreDataProperties.swift in Sources */,

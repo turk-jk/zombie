@@ -16,6 +16,11 @@
 		DE97B611249F555C00AE1F12 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE97B60F249F555C00AE1F12 /* LaunchScreen.storyboard */; };
 		DE97B61C249F555C00AE1F12 /* zombieTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B61B249F555C00AE1F12 /* zombieTests.swift */; };
 		DE97B627249F555C00AE1F12 /* zombieUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B626249F555C00AE1F12 /* zombieUITests.swift */; };
+		DE97B641249F57F500AE1F12 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B640249F57F500AE1F12 /* CoreDataStack.swift */; };
+		DE97B646249F582000AE1F12 /* Hospitals+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B642249F582000AE1F12 /* Hospitals+CoreDataClass.swift */; };
+		DE97B647249F582000AE1F12 /* Hospitals+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B643249F582000AE1F12 /* Hospitals+CoreDataProperties.swift */; };
+		DE97B648249F582000AE1F12 /* WaitingItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B644249F582000AE1F12 /* WaitingItem+CoreDataClass.swift */; };
+		DE97B649249F582000AE1F12 /* WaitingItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B645249F582000AE1F12 /* WaitingItem+CoreDataProperties.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +56,11 @@
 		DE97B622249F555C00AE1F12 /* zombieUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = zombieUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE97B626249F555C00AE1F12 /* zombieUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = zombieUITests.swift; sourceTree = "<group>"; };
 		DE97B628249F555C00AE1F12 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE97B640249F57F500AE1F12 /* CoreDataStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		DE97B642249F582000AE1F12 /* Hospitals+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Hospitals+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DE97B643249F582000AE1F12 /* Hospitals+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Hospitals+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		DE97B644249F582000AE1F12 /* WaitingItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WaitingItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		DE97B645249F582000AE1F12 /* WaitingItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WaitingItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +111,7 @@
 		DE97B600249F555900AE1F12 /* zombie */ = {
 			isa = PBXGroup;
 			children = (
+				DE97B63F249F57D400AE1F12 /* coreData */,
 				DE97B601249F555900AE1F12 /* AppDelegate.swift */,
 				DE97B603249F555900AE1F12 /* SceneDelegate.swift */,
 				DE97B605249F555900AE1F12 /* ViewController.swift */,
@@ -129,6 +140,18 @@
 				DE97B628249F555C00AE1F12 /* Info.plist */,
 			);
 			path = zombieUITests;
+			sourceTree = "<group>";
+		};
+		DE97B63F249F57D400AE1F12 /* coreData */ = {
+			isa = PBXGroup;
+			children = (
+				DE97B642249F582000AE1F12 /* Hospitals+CoreDataClass.swift */,
+				DE97B643249F582000AE1F12 /* Hospitals+CoreDataProperties.swift */,
+				DE97B644249F582000AE1F12 /* WaitingItem+CoreDataClass.swift */,
+				DE97B645249F582000AE1F12 /* WaitingItem+CoreDataProperties.swift */,
+				DE97B640249F57F500AE1F12 /* CoreDataStack.swift */,
+			);
+			path = coreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,6 +285,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE97B648249F582000AE1F12 /* WaitingItem+CoreDataClass.swift in Sources */,
+				DE97B647249F582000AE1F12 /* Hospitals+CoreDataProperties.swift in Sources */,
+				DE97B641249F57F500AE1F12 /* CoreDataStack.swift in Sources */,
+				DE97B646249F582000AE1F12 /* Hospitals+CoreDataClass.swift in Sources */,
+				DE97B649249F582000AE1F12 /* WaitingItem+CoreDataProperties.swift in Sources */,
 				DE97B606249F555900AE1F12 /* ViewController.swift in Sources */,
 				DE97B60C249F555900AE1F12 /* zombie.xcdatamodeld in Sources */,
 				DE97B602249F555900AE1F12 /* AppDelegate.swift in Sources */,

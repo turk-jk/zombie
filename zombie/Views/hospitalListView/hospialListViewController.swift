@@ -16,7 +16,7 @@ class hospialListViewController: UIViewController {
     internal var levelOfPain: Int
     internal var fetchedResultController: FRCTableViewDataSource<WaitingItem>!
     internal var locationManger : CLLocationManager?
-    private let backgroundColor = UIColor.baseBackGround
+    
     
     /// indecates the selection was made in the tableview not in the mapview
     internal var tableSelection = false
@@ -108,7 +108,7 @@ class hospialListViewController: UIViewController {
         v.separatorStyle = .none
         v.estimatedRowHeight = 150
         v.rowHeight = UITableView.automaticDimension
-        v.backgroundColor = .white
+//        v.backgroundColor = .white
         v.register(hospitalCell.self, forCellReuseIdentifier: "Cell")
         return v
     }()
@@ -136,12 +136,10 @@ extension hospialListViewController: FRCTableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! hospitalCell
         row.calculateTransport = calculateTransport
-        row.backgroundColor = backgroundColor
         let object = fetchedResultController.object(at: indexPath)
         row.selectedMode = selectedMode
         row.object = object
         let backgroundView = UIView()
-        backgroundView.backgroundColor = .secondColor
         row.selectedBackgroundView = backgroundView
         return row
     }
@@ -175,21 +173,21 @@ extension hospialListViewController: UITableViewDelegate{
         let segment = UISegmentedControl(items: images)
         segment.isHidden = !calculateTransport
         segment.selectedSegmentIndex = selectedSegmentIndex
-        segment.backgroundColor = .white
+//        segment.backgroundColor = .white
         segment.addTarget(self, action: #selector(transportModeChanged(_:)), for: .valueChanged)
         segment.tintColor = .mainColor
         
         let label = UILabel()
         label.text = !calculateTransport ? " Calculate ETA to the hospital:" : " Calculate ETA:"
         label.adjustsFontSizeToFitWidth = true
-        label.backgroundColor = .white
+//        label.backgroundColor = .white
         
         // Switch to turn off or on the transport mode
         let switchtransport = UISwitch()
         switchtransport.isOn = calculateTransport
         switchtransport.addTarget(self, action: #selector(calculateETAChanged(_:)), for: .valueChanged)
         switchtransport.onTintColor = .mainColor
-        switchtransport.backgroundColor = .white
+//        switchtransport.backgroundColor = .white
         
         let stack = UIStackView(arrangedSubviews: [label, segment, switchtransport])
         stack.axis = .horizontal
@@ -198,7 +196,7 @@ extension hospialListViewController: UITableViewDelegate{
         stack.spacing = 10
         
         let view = UIView()
-        view.backgroundColor = .white
+//        view.backgroundColor = .white
         view.addSubview(stack)
         stack.easy.layout(
             Edges()

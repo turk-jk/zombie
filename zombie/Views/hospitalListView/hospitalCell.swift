@@ -89,7 +89,7 @@ class hospitalCell: UITableViewCell {
         super.willMove(toSuperview: newSuperview)
         addSubview(transportView)
         addSubview(mainView)
-        //        mainView.addSubview(disclosureIndicator)
+        
         mainView.addSubview(hospitalNameLabel)
         mainView.addSubview(waitStrLabel)
         mainView.addSubview(timeLabel)
@@ -144,7 +144,7 @@ class hospitalCell: UITableViewCell {
     }
     lazy var mainView : UIView = {
         let v = UIView()
-        v.backgroundColor = .white
+        v.backgroundColor = .baseBackGround
         v.layer.cornerRadius = 10
         return v
     }()
@@ -157,7 +157,6 @@ class hospitalCell: UITableViewCell {
     lazy var transportlabel : UILabel = {
         let v = UILabel()
         v.font = .systemFont(ofSize: 13)
-        v.textColor = .darkGray
         v.textAlignment = .left
         
         return v
@@ -165,23 +164,19 @@ class hospitalCell: UITableViewCell {
     
     lazy var transportlabel2 : UILabel = {
         let v = UILabel()
-        v.textColor = .darkGray
         v.textAlignment = .right
         return v
     }()
     
     lazy var hospitalNameLabel : UILabel = {
         let v = UILabel()
-        v.textColor = .darkGray
         v.numberOfLines = 0
-        v.text = "St Vincent's Hospital "
         return v
     }()
     
     lazy var waitStrLabel : UILabel = {
         let v = UILabel()
-        v.textColor = .gray
-        
+        v.textColor = .systemGray
         v.numberOfLines = 1
         v.adjustsFontSizeToFitWidth = true
         v.text = "wait time:"

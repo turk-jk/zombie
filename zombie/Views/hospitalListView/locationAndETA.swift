@@ -120,26 +120,27 @@ extension hospialListViewController: CLLocationManagerDelegate{
         if let objects = fetchedResultController.objects(){
             let moc = self.fetchedResultController.managedObjectContext
             moc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
-            moc.perform {
-                let destinations = objects.map{"\($0.hospital.lat),\($0.hospital.lng)"}
-                
-                
-                API.eta(origin: origin, destinations: destinations, mode: self.selectedMode.st)
-                    .fetch { (mapStruct, error) in
-                        if let error = error{
-                            // FIXME: handle error
-                            print("API.eta error \(error.localizedDescription)")
+            let destinations = objects.map{"\($0.hospital.lat),\($0.hospital.lng)"}
+            
+            
+            API.eta(origin: origin, destinations: destinations, mode: self.selectedMode.st)
+                .fetch { (mapStruct, error) in
+                    if let error = error{
+                        // FIXME: handle error
+                        print("API.eta error \(error.localizedDescription)")
+                        return
+                    }
+                    
+                    guard let _struct = mapStruct as? MapsStruct,
+                        let durations = _struct.durations,
+                        let elements = _struct.elements else{
+                            print("not MapsStruct \(String(describing: error?.localizedDescription))")
                             return
-                        }
-                        
-                        guard let _struct = mapStruct as? MapsStruct,
-                            let durations = _struct.durations,
-                            let elements = _struct.elements else{
-                                print("not MapsStruct \(String(describing: error?.localizedDescription))")
-                                return
-                        }
-                        self.apiResponded(startAt: start, status: "\(durations)")
-                        self.apiResponded(startAt: start, status: "\(elements.map{$0.status})")
+                    }
+                    self.apiResponded(startAt: start, status: "\(durations)")
+                    self.apiResponded(startAt: start, status: "\(elements.map{$0.status})")
+                    
+                    moc.perform {
                         for (i , _element) in elements.enumerated(){
                             let object = objects[i]
                             let _duration = _element.duration.value
@@ -162,17 +163,17 @@ extension hospialListViewController: CLLocationManagerDelegate{
                                 object.waitingTime_transitETA = object.waitingTime + duration
                             }
                             
+                            do{
+                                try moc.save()
+                            }catch let nserror as NSError {
+                                print("erge453jytyr didnt save bcuz \(nserror.localizedDescription)")
+                                print("f43r346ge didnt save bcuz \(nserror.userInfo)")
+                            }
+                            
                         }
-                        
-                        
-                        do{
-                            try moc.save()
-                        }catch let nserror as NSError {
-                            print("erge453jytyr didnt save bcuz \(nserror.localizedDescription)")
-                            print("f43r346ge didnt save bcuz \(nserror.userInfo)")
-                        }
-                        self.fetchHospitalsLocally()
-                }
+                    }
+                    
+                    self.fetchHospitalsLocally()
             }
             
         }

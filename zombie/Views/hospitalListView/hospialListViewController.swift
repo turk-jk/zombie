@@ -116,6 +116,7 @@ class hospialListViewController: UIViewController {
     lazy var mapView : MKMapView = {
         let v = MKMapView()
         v.delegate = self
+        v.showsUserLocation = true
         return v
     }()
     

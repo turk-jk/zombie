@@ -60,14 +60,11 @@ extension hospialListViewController{
             }
             // check if there is more hotbitals to download
             if let next = _struct._links.next?.href, !next.isEmpty{
-                print("bringing more hospitals")
                 self.fetchremoteHospitals(page: page + 1)
             }else{
-                print("no more hospitals")
                 self.addAnnotation()
                 
             }
-            print("_struct \(_struct.hospitals.count)")
             
             let moc = CoreDataStack.shared.persistentContainer.newBackgroundContext()
             moc.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy

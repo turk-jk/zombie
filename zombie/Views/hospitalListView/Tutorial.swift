@@ -71,7 +71,7 @@ extension hospialListViewController{
         var message : String{
             switch self {
             case .toggleMap: return     "Press here to show the map"
-            case .ETA: return           "Press here to calculate ETA to the hospital"
+            case .ETA: return           "toggle the switch to calculate ETA to the hospital"
             case .showRoute: return     "Press on first Hospital to show the route on map"
             case .transportMode: return "Press here to change the transport mode"
             case .refresh: return       "Press here to refresh the data"
@@ -138,6 +138,8 @@ extension hospialListViewController{
         case .transportMode:
             return {
                 print("actionForTutorial \(type.str)")
+                self.selectedSegmentIndex = 1
+                self.segmentTransportMode.selectedSegmentIndex = self.selectedSegmentIndex
                 self.transportModeChanged(self.segmentTransportMode)
             }
         case .refresh:
@@ -165,7 +167,7 @@ extension hospialListViewController{
         frame.size = CGSize(width: frame.size.width + 10, height: frame.size.height + 10)
         v.frame = frame
         
-        let point = CGPoint(x: onView.frame.minX, y: onView.bounds.maxY )
+        let point = CGPoint(x: onView.frame.minX + 10, y: onView.bounds.maxY )
         let pointTo = onView.superview!.convert(point, to: self.view)
         popOver.show(v, point: pointTo)
     }

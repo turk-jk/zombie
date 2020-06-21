@@ -123,8 +123,13 @@ extension illnessListViewController: UITableViewDelegate, UITableViewDataSource{
     }
 }
 extension illnessListViewController: illnessDelgate{
-    func reportIllness(at index: Int, illnessName: String, levelOfPain: Int) {
-        
-    }
+     func reportIllness(at index: Int, illnessName: String, levelOfPain: Int) {
+           UserDefaults.standard.set(illnessName, forKey: st.illnessName.s)
+           UserDefaults.standard.set(levelOfPain, forKey: st.levelOfPain.s)
+           UserDefaults.standard.set(true, forKey: st.hasLevelOfPain.s)
+           let hospialListView = hospialListViewController(levelOfPain: levelOfPain)
+           self.navigationController?.pushViewController(hospialListView, animated: true)
+           self.navigationController?.viewControllers.remove(at: 0)
+       }
 }
 

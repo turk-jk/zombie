@@ -40,6 +40,22 @@ public class WaitingItem: NSManagedObject {
         averageProcessTime = 0
         waitingTime = 0
     }
+    convenience init( context : NSManagedObjectContext , item: waitingItem){
+        self.init(context)
+        modifyTo( context, item:item)
+    }
+    func modifyTo(_ context : NSManagedObjectContext, item: waitingItem){
+        
+        patientCount = item.patientCount
+        levelOfPain = item.levelOfPain
+        averageProcessTime = item.averageProcessTime
+        waitingTime = patientCount * averageProcessTime
+        waitingTime_drivingETA = waitingTime + hospital.drivingETA
+        waitingTime_walkingETA = waitingTime + hospital.walkingETA
+        waitingTime_bicyclingETA = waitingTime + hospital.bicyclingETA
+        waitingTime_transitETA = waitingTime + hospital.transitETA
+    }
+
     static func hasWaitingItem(_ context : NSManagedObjectContext? = nil, levelOfPain: Int, hospitalID: Int) -> WaitingItem? {
         let predicate = NSPredicate(format: "hospital.id == %i && levelOfPain == %i", hospitalID, levelOfPain)
         return getObjects(context, predicates: predicate,fetchLimit:1).first

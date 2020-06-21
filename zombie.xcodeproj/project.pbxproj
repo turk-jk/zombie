@@ -32,6 +32,13 @@
 		DE97B65E249F64FF00AE1F12 /* illnessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B65D249F64FF00AE1F12 /* illnessCell.swift */; };
 		DE97B660249F652900AE1F12 /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = DE97B65F249F652900AE1F12 /* Podfile */; };
 		DE97B662249F659F00AE1F12 /* strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B661249F659F00AE1F12 /* strings.swift */; };
+		DE97B665249F683B00AE1F12 /* hospialListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B664249F683B00AE1F12 /* hospialListViewController.swift */; };
+		DE97B667249F68D400AE1F12 /* NSFetchedRCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B666249F68D400AE1F12 /* NSFetchedRCHelper.swift */; };
+		DE97B669249F68FD00AE1F12 /* hospitalCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B668249F68FD00AE1F12 /* hospitalCell.swift */; };
+		DE97B66B249F691600AE1F12 /* locationAndETA.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B66A249F691600AE1F12 /* locationAndETA.swift */; };
+		DE97B66D249F692B00AE1F12 /* fetchHospitals.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B66C249F692B00AE1F12 /* fetchHospitals.swift */; };
+		DE97B66F249F693E00AE1F12 /* mapDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B66E249F693E00AE1F12 /* mapDelegate.swift */; };
+		DE97B671249F69D800AE1F12 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97B670249F69D800AE1F12 /* extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +92,13 @@
 		DE97B65D249F64FF00AE1F12 /* illnessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = illnessCell.swift; sourceTree = "<group>"; };
 		DE97B65F249F652900AE1F12 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; fileEncoding = 4; path = Podfile; sourceTree = "<group>"; };
 		DE97B661249F659F00AE1F12 /* strings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = strings.swift; sourceTree = "<group>"; };
+		DE97B664249F683B00AE1F12 /* hospialListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hospialListViewController.swift; sourceTree = "<group>"; };
+		DE97B666249F68D400AE1F12 /* NSFetchedRCHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSFetchedRCHelper.swift; sourceTree = "<group>"; };
+		DE97B668249F68FD00AE1F12 /* hospitalCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = hospitalCell.swift; sourceTree = "<group>"; };
+		DE97B66A249F691600AE1F12 /* locationAndETA.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = locationAndETA.swift; sourceTree = "<group>"; };
+		DE97B66C249F692B00AE1F12 /* fetchHospitals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchHospitals.swift; sourceTree = "<group>"; };
+		DE97B66E249F693E00AE1F12 /* mapDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mapDelegate.swift; sourceTree = "<group>"; };
+		DE97B670249F69D800AE1F12 /* extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,6 +231,7 @@
 		DE97B657249F63A500AE1F12 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				DE97B663249F682500AE1F12 /* hospitalListView */,
 				DE97B658249F63D400AE1F12 /* illnessListViewController.swift */,
 				DE97B65D249F64FF00AE1F12 /* illnessCell.swift */,
 			);
@@ -228,8 +243,22 @@
 			children = (
 				DE97B65B249F64B600AE1F12 /* themeColor.swift */,
 				DE97B661249F659F00AE1F12 /* strings.swift */,
+				DE97B666249F68D400AE1F12 /* NSFetchedRCHelper.swift */,
+				DE97B670249F69D800AE1F12 /* extensions.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DE97B663249F682500AE1F12 /* hospitalListView */ = {
+			isa = PBXGroup;
+			children = (
+				DE97B664249F683B00AE1F12 /* hospialListViewController.swift */,
+				DE97B668249F68FD00AE1F12 /* hospitalCell.swift */,
+				DE97B66A249F691600AE1F12 /* locationAndETA.swift */,
+				DE97B66C249F692B00AE1F12 /* fetchHospitals.swift */,
+				DE97B66E249F693E00AE1F12 /* mapDelegate.swift */,
+			);
+			path = hospitalListView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -410,6 +439,7 @@
 			files = (
 				DE97B656249F62F100AE1F12 /* APIController.swift in Sources */,
 				DE97B650249F624800AE1F12 /* HospitalStruct.swift in Sources */,
+				DE97B669249F68FD00AE1F12 /* hospitalCell.swift in Sources */,
 				DE97B648249F582000AE1F12 /* WaitingItem+CoreDataClass.swift in Sources */,
 				DE97B659249F63D400AE1F12 /* illnessListViewController.swift in Sources */,
 				DE97B647249F582000AE1F12 /* Hospitals+CoreDataProperties.swift in Sources */,
@@ -417,11 +447,17 @@
 				DE97B646249F582000AE1F12 /* Hospitals+CoreDataClass.swift in Sources */,
 				DE97B649249F582000AE1F12 /* WaitingItem+CoreDataProperties.swift in Sources */,
 				DE97B606249F555900AE1F12 /* ViewController.swift in Sources */,
+				DE97B665249F683B00AE1F12 /* hospialListViewController.swift in Sources */,
 				DE97B60C249F555900AE1F12 /* zombie.xcdatamodeld in Sources */,
 				DE97B652249F626A00AE1F12 /* IllnessesStruct.swift in Sources */,
+				DE97B66F249F693E00AE1F12 /* mapDelegate.swift in Sources */,
 				DE97B654249F628200AE1F12 /* transportMode.swift in Sources */,
+				DE97B671249F69D800AE1F12 /* extensions.swift in Sources */,
 				DE97B602249F555900AE1F12 /* AppDelegate.swift in Sources */,
 				DE97B65C249F64B600AE1F12 /* themeColor.swift in Sources */,
+				DE97B667249F68D400AE1F12 /* NSFetchedRCHelper.swift in Sources */,
+				DE97B66D249F692B00AE1F12 /* fetchHospitals.swift in Sources */,
+				DE97B66B249F691600AE1F12 /* locationAndETA.swift in Sources */,
 				DE97B662249F659F00AE1F12 /* strings.swift in Sources */,
 				DE97B64E249F622900AE1F12 /* MapsStruct.swift in Sources */,
 				DE97B65E249F64FF00AE1F12 /* illnessCell.swift in Sources */,

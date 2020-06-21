@@ -289,6 +289,18 @@ class zombie_apocalypseTests: XCTestCase {
         XCTAssertNotNil(illnessVC.tableView,
                         "illnessVC should have a tableview")
     }
+    func test_API_Error() {
+        let url = "bad url"
+        let expectedError = APIError.unvalidURL
+        var error: APIError?
+        
+        API.illnesses(page: 0).request(urlStr: url) { (data, respons, _error) in
+            error = _error as? APIError
+        }
+        XCTAssertEqual(error, expectedError)
+        XCTAssertEqual(error?.localizedDescription, expectedError.localizedDescription)
+
+    }
     
 }
 

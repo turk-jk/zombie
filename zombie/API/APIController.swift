@@ -9,11 +9,11 @@ import UIKit
 
 let googleKey = "..." // to be added before building the app
 enum APIError: Error {
-    case unvalidURL(url : String)
+    case unvalidURL
     var localizedDescription: String{
         switch self {
-        case .unvalidURL(let url):
-            return "Couldn't creat URL from \(url)"
+        case .unvalidURL:
+            return "Couldn't creat URL from "
         }
     }
 }
@@ -77,7 +77,7 @@ enum API{
     
     func request (urlStr : String,completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void){
         guard let url = URL(string: urlStr) else{
-            completionHandler(nil, nil, APIError.unvalidURL(url: urlStr))
+            completionHandler(nil, nil, APIError.unvalidURL)
             return
         }
         let task = URLSession.shared.dataTask(with: url, completionHandler: completionHandler)

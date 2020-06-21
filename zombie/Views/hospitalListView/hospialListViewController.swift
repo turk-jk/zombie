@@ -83,12 +83,14 @@ class hospialListViewController: UIViewController {
     }
     
     @objc internal func refreshList() {
+        vibeIt(.light)
         self.fetchremoteHospitals()
         if calculateTransport{
             locationManger?.startUpdatingLocation()
         }
     }
     @objc internal func toggleMapPressed() {
+        vibeIt(.light)
         fullTableConstraint.isActive = !fullTableConstraint.isActive
         halfTableConstraint.isActive = !halfTableConstraint.isActive
         UIView.animate(withDuration: 0.5) {
@@ -96,6 +98,7 @@ class hospialListViewController: UIViewController {
         }
     }
     @objc internal func ResetPressed() {
+        vibeIt(.light)
         UserDefaults.standard.removeAll()
         let illnessListView = illnessListViewController()
         self.navigationController?.viewControllers.insert(illnessListView, at: 0)
@@ -207,6 +210,7 @@ extension hospialListViewController: UITableViewDelegate{
     /// called when Transport mode is changed, update ETA
     /// - Parameter sender: SegmentedControl that was changed
     @objc func transportModeChanged(_ sender: UISegmentedControl)  {
+        vibeIt(.light)
         selectedSegmentIndex = sender.selectedSegmentIndex
         self.updateETA()
     }

@@ -173,7 +173,7 @@ extension hospialListViewController: UITableViewDelegate{
             print("Couldn't find annotation")
             return
         }
-        print("obj \(obj.hospital.name) annotation \(annotation.title)")
+        print("obj \(obj.hospital.name) annotation \(String(describing: annotation.title))")
         self.mapView.selectAnnotation(annotation, animated: true)
         
     }

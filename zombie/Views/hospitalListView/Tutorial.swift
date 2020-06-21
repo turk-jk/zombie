@@ -10,22 +10,24 @@ import UIKit
 extension hospialListViewController{
     
     func showTutorial() {
-        var tutorials_Done = UserDefaults.standard.array(forKey: st.tutorial.s) as? [String] ?? [String]()
-        print("tutorials_Done \(tutorials_Done)")
-        let tutorials_toDo = Tutorial.allCases.map{$0.str}
-        let tutorials_NotDoneYet = Array(Set(tutorials_toDo).subtracting(Set(tutorials_Done)))
-        print("tutorials_NotDoneYet \(tutorials_NotDoneYet)")
-        if let nextToDo = tutorials_NotDoneYet.first, let tutorial = Tutorial.init(str: nextToDo){
-            let view = viewForTutorial(type: tutorial)
-            let message = tutorial.message
-            let action = actionForTutorial(type: tutorial)
+        let _tutorials_Done = UserDefaults.standard.array(forKey: st.tutorial.s) as? [String] ?? [String]() 
+        var tutorials_Done = _tutorials_Done.map{Tutorial.init(str: $0)!}
+        var tutorials_NotDoneYet = Array(Set(Tutorial.allCases).subtracting(Set(tutorials_Done)))
+        tutorials_NotDoneYet.sort { (first, sec) -> Bool in
+            return first.order < sec.order
+        }
+        if let nextToDo = tutorials_NotDoneYet.first{
+            let view = viewForTutorial(type: nextToDo)
+            let message = nextToDo.message
+            let action = actionForTutorial(type: nextToDo)
             showMessage(onView: view, message: message,action: {
                 // do the action
                 action()
                 
                 // add the tutorial type to the done list
-                tutorials_Done.append(tutorial.str)
-                UserDefaults.standard.set(tutorials_Done, forKey: st.tutorial.s)
+                tutorials_Done.append(nextToDo)
+                let str = tutorials_Done.map{$0.str}
+                UserDefaults.standard.set(str, forKey: st.tutorial.s)
                 UserDefaults.standard.synchronize()
                 
                 // call showTutorial()
@@ -39,14 +41,19 @@ extension hospialListViewController{
         
     }
     enum Tutorial: CaseIterable {
-        case toggleMap, ETA, transportMode, refresh
+        case toggleMap
+        case ETA
+        case showRoute
+        case transportMode
+        case refresh
         
         var order: Int{
             switch self {
             case .toggleMap: return     0
             case .ETA: return           1
-            case .transportMode: return 2
-            case .refresh: return       3
+            case .showRoute: return     2
+            case .transportMode: return 3
+            case .refresh: return       4
                 
             }
         }
@@ -54,6 +61,7 @@ extension hospialListViewController{
             switch self {
             case .toggleMap: return     st.tutorial_toggleMap.s
             case .ETA: return           st.tutorial_ETA.s
+            case .showRoute: return     st.tutorial_showRoute.s
             case .transportMode: return st.tutorial_transportMode.s
             case .refresh: return       st.tutorial_refresh.s
                 
@@ -64,6 +72,7 @@ extension hospialListViewController{
             switch self {
             case .toggleMap: return     "Press here to show the map"
             case .ETA: return           "Press here to calculate ETA to the hospital"
+            case .showRoute: return     "Press on first Hospital to show the route on map"
             case .transportMode: return "Press here to change the transport mode"
             case .refresh: return       "Press here to refresh the data"
                 
@@ -72,10 +81,11 @@ extension hospialListViewController{
         
         init?(str : String){
             switch str {
-            case st.tutorial_refresh.s: self = .refresh
             case st.tutorial_toggleMap.s: self = .toggleMap
             case st.tutorial_ETA.s: self = .ETA
+            case st.tutorial_showRoute.s: self = .showRoute
             case st.tutorial_transportMode.s: self = .transportMode
+            case st.tutorial_refresh.s: self = .refresh
             default:
                 return nil
             }
@@ -92,16 +102,13 @@ extension hospialListViewController{
         case .transportMode:
             return segmentTransportMode
             
+        case .showRoute:
+            return self.tableView.visibleCells.first!
         }
     }
     
     func actionForTutorial(type: Tutorial) -> ()-> () {
         switch type {
-        case .refresh:
-            return {
-                print("actionForTutorial \(type.str)")
-                self.refreshList()
-            }
         case .toggleMap:
             return {
                 print("actionForTutorial \(type.str)")
@@ -113,10 +120,30 @@ extension hospialListViewController{
                 self.switchtransport.isOn = !self.switchtransport.isOn
                 self.calculateETAChanged(self.switchtransport)
             }
+        case .showRoute:
+            return {
+                print("actionForTutorial \(type.str)")
+                let indexPath = IndexPath(item: 0, section: 0)
+                self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: .top)
+                let obj = self.fetchedResultController.object(at: indexPath)
+
+                guard let annotation = self.mapView.annotations.first (where: { (annotation) -> Bool in
+                    return obj.hospital.name == annotation.title
+                }) else{
+                    print("Couldn't find annotation")
+                    return
+                }
+                self.mapView.selectAnnotation(annotation, animated: true)
+            }
         case .transportMode:
             return {
                 print("actionForTutorial \(type.str)")
                 self.transportModeChanged(self.segmentTransportMode)
+            }
+        case .refresh:
+            return {
+                print("actionForTutorial \(type.str)")
+                self.refreshList()
             }
             
         }
@@ -139,7 +166,7 @@ extension hospialListViewController{
         v.frame = frame
         
         let point = CGPoint(x: onView.frame.minX, y: onView.bounds.maxY )
-        let pointTo = onView.convert(point, to: self.view)
+        let pointTo = onView.superview!.convert(point, to: self.view)
         popOver.show(v, point: pointTo)
     }
 }

@@ -60,7 +60,6 @@ class hospialListViewController: UIViewController {
         
         self.navigationItem.rightBarButtonItems = [refresh, toggleMap]
         self.navigationItem.leftBarButtonItem = resetButton
-        
     }
     override func viewDidAppear(_ animated: Bool) {
         
@@ -119,7 +118,11 @@ class hospialListViewController: UIViewController {
         v.showsUserLocation = true
         return v
     }()
-    
+    var mapRoute: MKRoute? {
+        didSet{
+            self.updateMap(with: mapRoute, oldMapRoute: oldValue)
+        }
+    }
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

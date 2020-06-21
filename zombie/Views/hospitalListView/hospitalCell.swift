@@ -62,14 +62,25 @@ class hospitalCell: UITableViewCell {
             eta = object.hospital.transitETA
         }
         
-        fullString.append(NSAttributedString(string: "  \(eta) mins",
+        
+
+        var str = ""
+        var str2 = ""
+        if eta == 0{
+            str = "⚠️ N/A"
+            str2 = "Total: -- mins  "
+        }else{
+            str = "  \(eta) mins"
+            str2 = "Total: \(object.waitingTime + eta) mins  "
+        }
+        
+        fullString.append(NSAttributedString(string: str,
             attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13),
                          NSAttributedString.Key.baselineOffset: 5]))
         let fullString2 = NSMutableAttributedString()
-
-        fullString2.append(NSAttributedString(string: "Total: \(object.waitingTime + eta) mins  ",
-            attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15),
-                         NSAttributedString.Key.foregroundColor: UIColor.mainColor]))
+       fullString2.append(NSAttributedString(string: str2,
+                  attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15),
+                               NSAttributedString.Key.foregroundColor: UIColor.mainColor]))
         
         return (fullString, fullString2)
         

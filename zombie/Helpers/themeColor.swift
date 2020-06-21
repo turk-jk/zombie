@@ -16,4 +16,5 @@ extension UIColor{
     static let pain_2 = #colorLiteral(red: 0.988658011, green: 0.8116442561, blue: 0.1085081771, alpha: 1)
     static let pain_3 = #colorLiteral(red: 0.8798246384, green: 0.4430575073, blue: 0.103135027, alpha: 1)
     static let pain_4 = #colorLiteral(red: 1, green: 0, blue: 0.2019881308, alpha: 1)
+    static let warning = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
 }

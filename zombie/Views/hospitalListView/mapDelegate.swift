@@ -6,10 +6,9 @@
 //  Copyright © 2020 yacob jamal kazal. All rights reserved.
 //
 
-import Foundation
-
 import UIKit
 import MapKit
+
 extension hospialListViewController: MKMapViewDelegate{
     func addAnnotation() {
         let allAnnotations = self.mapView.annotations
@@ -44,6 +43,9 @@ extension hospialListViewController: MKMapViewDelegate{
             mapView.showAnnotations(annotations, animated: true)
         }
     }
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        self.mapRoute = nil
+    }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         print("mapView didSelect")
         guard let annotation = view.annotation else {
@@ -52,14 +54,16 @@ extension hospialListViewController: MKMapViewDelegate{
         }
 
         //find route
-        if self.calculateTransport, let mode = transportMode.init(number: self.selectedSegmentIndex).transportType{
+        let mode = transportMode.init(number: self.selectedSegmentIndex).transportType
+        if self.calculateTransport, let mode = mode{
             print("transportType")
             API.AppleETA(source: mapView.userLocation.coordinate, destination: annotation.coordinate, mode: mode)
                 .calculate { (route, error) in
-                    if let error = error{
+                    if let error = error {
                         print("error: ",error.localizedDescription)
+                        
                     }else if let route = route {
-                        self.updateMap(with: route)
+                        self.mapRoute = route
                     }
             }
         }else{
@@ -87,36 +91,75 @@ extension hospialListViewController: MKMapViewDelegate{
             }
         }
     }
-    func updateMap(with mapRoute: MKRoute) {
+    func updateMap(with mapRoute: MKRoute?, oldMapRoute: MKRoute?) {
         let padding: CGFloat = 100
-        mapView.removeOverlays(self.mapView.overlays)
-        mapView.addOverlay(mapRoute.polyline)
         
-//        let rect = mapRoute.polyline.boundingMapRect
-//        self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
-//        mapView.visibleMapRect.union(<#T##rect2: MKMapRect##MKMapRect#>)
-//        mapRoute.polyline.boundingMapRect.union(<#T##rect2: MKMapRect##MKMapRect#>)
-        mapView.setVisibleMapRect(
-            mapRoute.polyline.boundingMapRect.union(
-                mapRoute.polyline.boundingMapRect
-            ),
-            edgePadding: UIEdgeInsets(
-                top: padding,
-                left: padding,
-                bottom: padding,
-                right: padding
-            ),
-            animated: true
-        )
+        if let oldMapRoute = oldMapRoute{
+            mapView.removeOverlays([oldMapRoute.polyline])
+        }
+        
+        if let mapRoute = mapRoute{
+            mapView.addOverlay(mapRoute.polyline)
+            mapView.setVisibleMapRect(
+                mapRoute.polyline.boundingMapRect.union(
+                    mapRoute.polyline.boundingMapRect
+                ),
+                edgePadding: UIEdgeInsets(
+                    top: padding,
+                    left: padding,
+                    bottom: padding,
+                    right: padding
+                ),
+                animated: true
+            )
+        }
+        
+       
         
     }
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-        let renderer = MKPolylineRenderer(overlay: overlay)
+        if type(of: overlay) == MKPolygon.self{
+            let renderer = MKPolygonRenderer(overlay: overlay)
+            
+            renderer.fillColor = UIColor.magenta.withAlphaComponent(0.4)
+            return renderer
+        }else{
 
-        renderer.strokeColor = .systemBlue
-        renderer.lineWidth = 3
+            let renderer = MKPolylineRenderer(overlay: overlay)
 
-        return renderer
+            renderer.strokeColor = .systemBlue
+            renderer.lineWidth = 3
+
+            return renderer
+        }
     }
 }
 
+extension String{
+    var lat: Double{
+        let latLng = self.split(separator: ",")
+        let lat: Double = Double(latLng[0]) ?? 0
+        return lat
+    }
+    var lng: Double{
+        let latLng = self.split(separator: ",")
+        let lng: Double = Double(latLng[1]) ?? 0
+        return lng
+    }
+    var location: (Double, Double){
+        return (lat, lng)
+    }
+}
+extension Double{
+    init(_ str: String) {
+        self.init(str)!
+    }
+}
+extension CLLocationCoordinate2D{
+    init(_ str: String) {
+        let latLng = str.split(separator: ",")
+        let lat = CLLocationDegrees( Double(latLng[0]) ?? 0)
+        let lng = CLLocationDegrees( Double(latLng[1]) ?? 0)
+        self.init(latitude: lat, longitude: lng)
+    }
+}

@@ -132,16 +132,20 @@ extension hospialListViewController: CLLocationManagerDelegate{
                         }
                         
                         guard let _struct = mapStruct as? MapsStruct,
-                            let durations = _struct.durations else{
+                            let durations = _struct.durations,
+                            let elements = _struct.elements else{
                                 print("not MapsStruct \(String(describing: error?.localizedDescription))")
                                 return
                         }
-                        
-                        
                         self.apiResponded(startAt: start, status: "\(durations)")
-                        for (i , _duration) in durations.enumerated(){
+                        self.apiResponded(startAt: start, status: "\(elements.map{$0.status})")
+                        for (i , _element) in elements.enumerated(){
                             let object = objects[i]
+                            let _duration = _element.duration.value
                             let duration = _duration / 60
+                            if _element.status == "ZERO_RESULTS" {
+                                continue
+                            }
                             switch self.selectedMode {
                             case .driving:
                                 object.hospital.drivingETA = duration

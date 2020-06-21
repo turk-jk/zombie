@@ -15,6 +15,7 @@ extension hospialListViewController: CLLocationManagerDelegate{
     @objc func calculateETAChanged(_ sender: UISwitch)  {
         print("\n\ncalculateETAChanged \(sender.isOn)")
         
+        vibeIt(.light)
         if sender.isOn {
             
             self.locationManger?.delegate = self
@@ -35,7 +36,7 @@ extension hospialListViewController: CLLocationManagerDelegate{
                     guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
                         return
                     }
-
+                    
                     if UIApplication.shared.canOpenURL(settingsUrl) {
                         UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
                         })

@@ -57,6 +57,7 @@ class illnessCell: UITableViewCell {
     }
     
     @objc private func painLevelButtonPressed(_ sender : UIButton) {
+        vibeIt(.light)
         delegate?.reportIllness(at: self.tag, illnessName: illnessName, levelOfPain: sender.tag)
     }
     

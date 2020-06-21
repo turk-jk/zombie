@@ -102,8 +102,10 @@ extension illnessListViewController: UITableViewDelegate, UITableViewDataSource{
         if self.selectedIndex == indexPath{
             tableView.deselectRow(at: indexPath, animated: true)
             self.selectedIndex = nil
+            vibeIt(.light)
         }else{
             self.selectedIndex = indexPath
+            vibeIt(.light)
         }
     }
 

@@ -44,9 +44,11 @@ extension hospialListViewController: MKMapViewDelegate{
         }
     }
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        vibeIt(.light)
         self.mapRoute = nil
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        vibeIt(.light)
         print("mapView didSelect")
         guard let annotation = view.annotation else {
             print("no annotation")

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EasyPeasy
 
 class illnessListViewController: UIViewController {
     
@@ -34,13 +35,17 @@ class illnessListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = "Select an illness"
-        view = tableView
+        view.addSubview(tableView)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         fetchIllness()
     }
-    
+    override func viewWillLayoutSubviews() {
+        tableView.easy.layout(
+            Edges()
+        )
+    }
 
     lazy var tableView : UITableView = {
         let v = UITableView(frame: .zero, style: UITableView.Style.plain)

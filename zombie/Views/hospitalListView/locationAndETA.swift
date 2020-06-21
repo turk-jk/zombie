@@ -132,13 +132,13 @@ extension hospialListViewController: CLLocationManagerDelegate{
                     }
                     
                     guard let _struct = mapStruct as? MapsStruct,
-                        let durations = _struct.durations,
+//                        let durations = _struct.durations,
                         let elements = _struct.elements else{
                             print("not MapsStruct \(String(describing: error?.localizedDescription))")
                             return
                     }
-                    self.apiResponded(startAt: start, status: "\(durations)")
-                    self.apiResponded(startAt: start, status: "\(elements.map{$0.status})")
+//                    self.apiResponded(startAt: start, status: "\(durations)")
+//                    self.apiResponded(startAt: start, status: "\(elements.map{$0.status})")
                     
                     moc.perform {
                         for (i , _element) in elements.enumerated(){

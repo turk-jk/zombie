@@ -13,6 +13,14 @@ enum st: String{
     case userLocation = "userLocation"
     case hasLevelOfPain = "hasLevelOfPain"
     case UI_Testing = "UI_Testing"
+
+    case tutorial_toggleMap = "tutorial_toggleMap"
+    case tutorial_showRoute = "tutorial_showRoute"
+    case tutorial_ETA = "tutorial_ETA"
+    case tutorial_transportMode = "tutorial_transportMode"
+    case tutorial_refresh = "tutorial_refresh"
+    case tutorial = "tutorial"
+    
     var s: String{
         return self.rawValue
     }

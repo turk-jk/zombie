@@ -163,9 +163,7 @@ extension hospialListViewController: UITableViewDelegate{
         }
         print("obj \(obj.hospital.name) annotation \(annotation.title)")
         self.mapView.selectAnnotation(annotation, animated: true)
-        self.mapView.showAnnotations([annotation], animated: true)
-        let region = MKCoordinateRegion( center: annotation.coordinate, latitudinalMeters: 50000, longitudinalMeters: 50000)
-        mapView.setRegion(mapView.regionThatFits(region), animated: true)
+        
     }
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         

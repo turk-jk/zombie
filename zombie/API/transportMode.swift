@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 enum transportMode: CaseIterable {
     case  driving, walking, bicycling, transit
@@ -18,7 +19,14 @@ enum transportMode: CaseIterable {
         case .transit: return "transit"
         }
     }
-    
+    var transportType: MKDirectionsTransportType?{
+        switch self {
+        case .driving: return .automobile
+        case .walking: return .walking
+        case .bicycling: return nil
+        case .transit: return .transit
+        }
+    }
     var image: UIImage{
         switch self {
         case .driving: return #imageLiteral(resourceName: "icons8-car-20")

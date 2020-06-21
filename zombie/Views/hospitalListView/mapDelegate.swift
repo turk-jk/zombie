@@ -45,12 +45,36 @@ extension hospialListViewController: MKMapViewDelegate{
         }
     }
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        print("mapView didSelect")
+        guard let annotation = view.annotation else {
+            print("no annotation")
+            return
+        }
+
+        //find route
+        if self.calculateTransport, let mode = transportMode.init(number: self.selectedSegmentIndex).transportType{
+            print("transportType")
+            API.AppleETA(source: mapView.userLocation.coordinate, destination: annotation.coordinate, mode: mode)
+                .calculate { (route, error) in
+                    if let error = error{
+                        print("error: ",error.localizedDescription)
+                    }else if let route = route {
+                        self.updateMap(with: route)
+                    }
+            }
+        }else{
+            
+            // Change camera postion if there is no routing or calculateTransport mode is NOT activated
+            self.mapView.showAnnotations([annotation], animated: true)
+            let region = MKCoordinateRegion( center: annotation.coordinate, latitudinalMeters: 50000, longitudinalMeters: 50000)
+            mapView.setRegion(mapView.regionThatFits(region), animated: true)
+        }
+        
         if tableSelection{
             tableSelection = false
             return
         }
-        if let annotation = view.annotation,
-            let objects = fetchedResultController.objects(),
+        if let objects = fetchedResultController.objects(),
             let index = objects.firstIndex(where: {$0.hospital.name == annotation.title}){
             UIView.animate(withDuration: 0.7) {
                 self.mapView.centerCoordinate = annotation.coordinate
@@ -62,6 +86,37 @@ extension hospialListViewController: MKMapViewDelegate{
                 self.tableView.deselectRow(at: indexpath, animated: true)
             }
         }
+    }
+    func updateMap(with mapRoute: MKRoute) {
+        let padding: CGFloat = 100
+        mapView.removeOverlays(self.mapView.overlays)
+        mapView.addOverlay(mapRoute.polyline)
+        
+//        let rect = mapRoute.polyline.boundingMapRect
+//        self.mapView.setRegion(MKCoordinateRegion(rect), animated: true)
+//        mapView.visibleMapRect.union(<#T##rect2: MKMapRect##MKMapRect#>)
+//        mapRoute.polyline.boundingMapRect.union(<#T##rect2: MKMapRect##MKMapRect#>)
+        mapView.setVisibleMapRect(
+            mapRoute.polyline.boundingMapRect.union(
+                mapRoute.polyline.boundingMapRect
+            ),
+            edgePadding: UIEdgeInsets(
+                top: padding,
+                left: padding,
+                bottom: padding,
+                right: padding
+            ),
+            animated: true
+        )
+        
+    }
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+
+        renderer.strokeColor = .systemBlue
+        renderer.lineWidth = 3
+
+        return renderer
     }
 }
 

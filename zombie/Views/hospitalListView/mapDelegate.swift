@@ -35,7 +35,6 @@ extension hospialListViewController: MKMapViewDelegate{
                     subtitle = "\(object.waitingTime ) mins"
                 }
                 let annotation = MKPointAnnotation(__coordinate: loc, title: object.hospital.name, subtitle: subtitle)
-//                annotation.coordinate = loc
                 return annotation
             }
             

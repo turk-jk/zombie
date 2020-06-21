@@ -111,7 +111,7 @@ class hospialListViewController: UIViewController {
         v.separatorStyle = .none
         v.estimatedRowHeight = 150
         v.rowHeight = UITableView.automaticDimension
-//        v.backgroundColor = .white
+        
         v.register(hospitalCell.self, forCellReuseIdentifier: "Cell")
         return v
     }()
@@ -143,6 +143,7 @@ extension hospialListViewController: FRCTableViewDelegate{
         row.selectedMode = selectedMode
         row.object = object
         let backgroundView = UIView()
+        backgroundView.backgroundColor = UIColor.mainColor.withAlphaComponent(0.3)
         row.selectedBackgroundView = backgroundView
         return row
     }
@@ -176,21 +177,19 @@ extension hospialListViewController: UITableViewDelegate{
         let segment = UISegmentedControl(items: images)
         segment.isHidden = !calculateTransport
         segment.selectedSegmentIndex = selectedSegmentIndex
-//        segment.backgroundColor = .white
+        
         segment.addTarget(self, action: #selector(transportModeChanged(_:)), for: .valueChanged)
         segment.tintColor = .mainColor
         
         let label = UILabel()
         label.text = !calculateTransport ? " Calculate ETA to the hospital:" : " Calculate ETA:"
         label.adjustsFontSizeToFitWidth = true
-//        label.backgroundColor = .white
         
         // Switch to turn off or on the transport mode
         let switchtransport = UISwitch()
         switchtransport.isOn = calculateTransport
         switchtransport.addTarget(self, action: #selector(calculateETAChanged(_:)), for: .valueChanged)
         switchtransport.onTintColor = .mainColor
-//        switchtransport.backgroundColor = .white
         
         let stack = UIStackView(arrangedSubviews: [label, segment, switchtransport])
         stack.axis = .horizontal
@@ -199,7 +198,7 @@ extension hospialListViewController: UITableViewDelegate{
         stack.spacing = 10
         
         let view = UIView()
-//        view.backgroundColor = .white
+        view.backgroundColor = UIColor.baseBackGround
         view.addSubview(stack)
         stack.easy.layout(
             Edges()

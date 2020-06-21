@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-let googleKey = "AIzaSyAnbXrSggCERzCQhTFhnc9hVmfGUsJj1ok" // to be added before building the app
+let googleKey = "" // to be added before building the app
 enum APIError: Error {
     case unvalidURL
     case ZERO_RESULTS

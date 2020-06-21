@@ -49,7 +49,6 @@ class illnessListViewController: UIViewController {
         v.separatorStyle = .none
         v.estimatedRowHeight = 150
         v.rowHeight = UITableView.automaticDimension
-//        v.backgroundColor = .white
         v.register(illnessCell.self, forCellReuseIdentifier: "Cell")
         return v
     }()
@@ -87,7 +86,6 @@ extension illnessListViewController: UITableViewDelegate, UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let row = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! illnessCell
         row.showPainLevel = self.selectedIndex == indexPath
-//        row.backgroundColor = backgroundColor
         row.tag = indexPath.row
         row.delegate = self
         let illness = self.illnesses[indexPath.row]

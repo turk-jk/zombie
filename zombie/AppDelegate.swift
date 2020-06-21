@@ -18,7 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         setStateForUITesting()
 
-        
+        if googleKey == ""{
+            fatalError("Add google key first")
+        }
         return true
     }
     

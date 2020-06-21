@@ -62,14 +62,25 @@ class hospitalCell: UITableViewCell {
             eta = object.hospital.transitETA
         }
         
-        fullString.append(NSAttributedString(string: "  \(eta) mins",
+        
+
+        var str = ""
+        var str2 = ""
+        if eta == 0{
+            str = "⚠️ N/A"
+            str2 = "Total: -- mins  "
+        }else{
+            str = "  \(eta) mins"
+            str2 = "Total: \(object.waitingTime + eta) mins  "
+        }
+        
+        fullString.append(NSAttributedString(string: str,
             attributes: [NSAttributedString.Key.font : UIFont.systemFont(ofSize: 13),
                          NSAttributedString.Key.baselineOffset: 5]))
         let fullString2 = NSMutableAttributedString()
-
-        fullString2.append(NSAttributedString(string: "Total: \(object.waitingTime + eta) mins  ",
-            attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15),
-                         NSAttributedString.Key.foregroundColor: UIColor.mainColor]))
+       fullString2.append(NSAttributedString(string: str2,
+                  attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 15),
+                               NSAttributedString.Key.foregroundColor: UIColor.mainColor]))
         
         return (fullString, fullString2)
         
@@ -78,7 +89,7 @@ class hospitalCell: UITableViewCell {
         super.willMove(toSuperview: newSuperview)
         addSubview(transportView)
         addSubview(mainView)
-        //        mainView.addSubview(disclosureIndicator)
+        
         mainView.addSubview(hospitalNameLabel)
         mainView.addSubview(waitStrLabel)
         mainView.addSubview(timeLabel)
@@ -133,7 +144,7 @@ class hospitalCell: UITableViewCell {
     }
     lazy var mainView : UIView = {
         let v = UIView()
-        v.backgroundColor = .white
+        v.backgroundColor = .baseBackGround
         v.layer.cornerRadius = 10
         return v
     }()
@@ -146,7 +157,6 @@ class hospitalCell: UITableViewCell {
     lazy var transportlabel : UILabel = {
         let v = UILabel()
         v.font = .systemFont(ofSize: 13)
-        v.textColor = .darkGray
         v.textAlignment = .left
         
         return v
@@ -154,23 +164,19 @@ class hospitalCell: UITableViewCell {
     
     lazy var transportlabel2 : UILabel = {
         let v = UILabel()
-        v.textColor = .darkGray
         v.textAlignment = .right
         return v
     }()
     
     lazy var hospitalNameLabel : UILabel = {
         let v = UILabel()
-        v.textColor = .darkGray
         v.numberOfLines = 0
-        v.text = "St Vincent's Hospital "
         return v
     }()
     
     lazy var waitStrLabel : UILabel = {
         let v = UILabel()
-        v.textColor = .gray
-        
+        v.textColor = .systemGray
         v.numberOfLines = 1
         v.adjustsFontSizeToFitWidth = true
         v.text = "wait time:"

@@ -24,6 +24,7 @@ class illnessCell: UITableViewCell {
         didSet{
             stack.isHidden = !showPainLevel
             painLevelLabel.isHidden = !showPainLevel
+            disclosureIndicator.isHidden = showPainLevel
             if showPainLevel{
                 painLevelLabel.text = "Select severity Level:"
             }else{
@@ -50,7 +51,7 @@ class illnessCell: UITableViewCell {
         _ = painButtons.map{$0.addTarget(self, action: #selector(painLevelButtonPressed(_:)), for: .touchUpInside)}
         _ = painButtons.map({
             $0.layer.cornerRadius = painButtonWidth / 2
-            $0.backgroundColor = .white
+//            $0.backgroundColor = .white
             $0.imageView?.contentMode = .scaleAspectFit
         })
     }
@@ -103,7 +104,7 @@ class illnessCell: UITableViewCell {
     // MARK: - Views
     private lazy var mainView : UIView = {
         let v = UIView()
-        v.backgroundColor = .white
+        v.backgroundColor = .baseBackGround
         v.layer.cornerRadius = 10
         return v
     }()
@@ -117,15 +118,12 @@ class illnessCell: UITableViewCell {
     private lazy var painLevelLabel : UILabel = {
         let v = UILabel()
         v.font = .systemFont(ofSize: 13)
-        v.textColor = .darkGray
         return v
     }()
     
     private lazy var illnessNameLabel : UILabel = {
         let v = UILabel()
-        v.textColor = .darkGray
         v.numberOfLines = 0
-        v.text = "St Vincent's Hospital "
         return v
     }()
     

@@ -152,15 +152,19 @@ extension hospialListViewController: CLLocationManagerDelegate{
                             case .driving:
                                 object.hospital.drivingETA = duration
                                 object.waitingTime_drivingETA = object.waitingTime + duration
+                                object.drivingDis = _element.distance.value / 1000
                             case .walking:
                                 object.hospital.walkingETA = duration
                                 object.waitingTime_walkingETA = object.waitingTime + duration
+                                object.walkingDis = _element.distance.value / 1000
                             case .bicycling:
                                 object.hospital.bicyclingETA = duration
                                 object.waitingTime_bicyclingETA = object.waitingTime + duration
+                                object.bicyclingDis = _element.distance.value / 1000
                             case .transit:
                                 object.hospital.transitETA = duration
                                 object.waitingTime_transitETA = object.waitingTime + duration
+                                object.transitDis = _element.distance.value / 1000
                             }
                             
                             do{

@@ -54,6 +54,10 @@ public class WaitingItem: NSManagedObject {
         waitingTime_walkingETA = waitingTime + hospital.walkingETA
         waitingTime_bicyclingETA = waitingTime + hospital.bicyclingETA
         waitingTime_transitETA = waitingTime + hospital.transitETA
+        transitDis = hospital.transitETA
+        drivingDis = hospital.transitETA
+        walkingDis = hospital.transitETA
+        bicyclingDis = hospital.transitETA
     }
 
     static func hasWaitingItem(_ context : NSManagedObjectContext? = nil, levelOfPain: Int, hospitalID: Int) -> WaitingItem? {

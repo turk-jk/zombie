@@ -168,7 +168,10 @@ extension hospialListViewController{
         v.frame = frame
         
         let point = CGPoint(x: onView.frame.minX + 10, y: onView.bounds.maxY )
-        let pointTo = onView.superview!.convert(point, to: self.view)
+        guard let superview = onView.superview else{
+            return
+        }
+        let pointTo = superview.convert(point, to: self.view)
         popOver.show(v, point: pointTo)
     }
 }

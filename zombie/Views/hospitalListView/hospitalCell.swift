@@ -23,6 +23,7 @@ class hospitalCell: UITableViewCell {
             let waitingTime = object.waitingTime
             self.hospitalNameLabel.text = object.hospital.name
             self.timeLabel.text = "\(waitingTime) mins"
+            
             if calculateTransport{
                 self.timeLabel.font = .systemFont(ofSize: 13)
                 let (transportAttrStr, transportAttrStr2) = self.transportAttrStr(selectedMode: selectedMode, object: object)
@@ -51,15 +52,20 @@ class hospitalCell: UITableViewCell {
         fullString.append(image1String)
         
         var eta = 0
+        var dis = 0
         switch self.selectedMode {
         case .driving:
             eta = object.hospital.drivingETA
+            dis = object.drivingDis
         case .walking:
             eta = object.hospital.walkingETA
+            dis = object.walkingDis
         case .bicycling:
             eta  = object.hospital.bicyclingETA
+            dis = object.bicyclingDis
         case .transit:
             eta = object.hospital.transitETA
+            dis = object.transitDis
         }
         
         
@@ -70,7 +76,7 @@ class hospitalCell: UITableViewCell {
             str = "⚠️ N/A"
             str2 = "Total: -- mins  "
         }else{
-            str = "  \(eta) mins"
+            str = "  \(eta) mins \(dis) km"
             str2 = "Total: \(object.waitingTime + eta) mins  "
         }
         

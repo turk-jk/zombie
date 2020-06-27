@@ -69,7 +69,6 @@ class hospialListViewController: UIViewController {
         fetchremoteHospitals()
         DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) {
             
-//            UserDefaults.standard.set(nil, forKey: st.tutorial.s)
             self.showTutorial()
         }
     }
